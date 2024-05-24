@@ -2,7 +2,7 @@ import foodModel from '../models/foodModel.js';
 import fs from 'fs'
 
 
-const errorLog = (error) => {
+const errorLog = (error, res) => {
     console.log(error);
     res.json({success:false, message: 'Error'})
 }
@@ -25,7 +25,7 @@ const addFood = async (req, res) => {
         await food.save();
         res.json({success:true, message: "Food Added"})
     } catch (error) {
-        errorLog(error);
+        errorLog(error, res);
     }
 }
 
@@ -50,7 +50,7 @@ const removeFood = async (req, res) => {
         await foodModel.findByIdAndDelete(req.body.id);
         res.json({success:true, message: 'Food Removed'});
     }catch(error){
-        errorLog(error);
+        errorLog(error); 
     }
 }
 
