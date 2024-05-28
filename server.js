@@ -5,6 +5,9 @@ import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
 
+//Env importing
+import 'dotenv/config.js';
+
 // App config
 const app = express();
 const port  = 4000
