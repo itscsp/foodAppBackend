@@ -12,7 +12,7 @@ const placeOrder = async (req, res) => {
     try{
         const newOrder = new orderModel({
             userId:req.body.userId,
-            item:req.body.items,
+            items:req.body.items,
             amount: req.body.amount,
             address: req.body.address
         })
@@ -59,11 +59,32 @@ const placeOrder = async (req, res) => {
     }
 }
 
-const verifyOrder = async (req, res) {
+const verifyOrder = async (req, res) => {
+    const {orderId, success} = req.body;
 
+    try {
+        if(success == 'true'){
+            await orderModel.findByIdAndUpdate(orderId, {payment:true});
+            res.json({success:true, message: "Paid"})
+        } else {
+            await orderModel.findByIdAndUpdate(orderId);
+            res.json({success:false, message: "Not Paid"})
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({success:false, message: "Error!"})
+    }
 }
 
-export {placeOrder, verifyOrder}
+const userOrders = async (req, res) => {
 
+    try{
+        const orders = await orderModel.find({userId:req.body.userId});
+        res.json({success:true, data:orders})
+    }catch(error) {
+        console.log(error);
+        res.json({success:false, message:"Error"})
+    }
+}
 
-export {placeOrder}
+export {placeOrder, verifyOrder, userOrders}
