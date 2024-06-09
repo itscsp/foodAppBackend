@@ -11,6 +11,7 @@ import orderRouter from "./routes/orderRoute.js";
 //Env importing 
 import 'dotenv/config.js';
 
+
 // App config
 const app = express();
 const port  = 4000
@@ -27,7 +28,7 @@ app.use("/api/food", foodRouter)
 app.use("/images", express.static('uploads')); // To get image by url
 app.use("/api/user", userRouter)
 app.use("/api/cart", cartRouter)
-app.use("/api/cart", orderRouter)
+app.use("/api/order", orderRouter)
 
 
 
