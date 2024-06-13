@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 // placing user order from frontned
 const placeOrder = async (req, res) => {
-    const frontned_url = 'http://localhost:5173';
+    const frontned_url = 'https://foodapp-2lug.onrender.com';
     try {
         const newOrder = new orderModel({
             userId: req.body.userId,
